@@ -1,6 +1,6 @@
 
 
-local name = require "lib.middleclass"
+local class = require "lib.middleclass"
 
 local Entity = class('Entity')
 

@@ -2,11 +2,11 @@
 
 local class = require 'lib.middleclass'
 local util  = require  'util'
-local media = require 'media'
+-- local media = require 'media'
 
 local Entity = require 'entities.entity'
 local Debris = require 'entities.debris'
-local Puff   = require 'entities.puff'
+-- local Puff   = require 'entities.puff'
 
 local Player = class('Player',Entity)
 Player.static.updateOrder =1
