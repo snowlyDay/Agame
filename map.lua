@@ -18,18 +18,17 @@ local sortByCreatedAt = function(a,b)
 end
 local Map = class('Map')
 
-function Map:initalize(width,height,camera)
+function Map:initialize(width,height,camera)
    self.width = width
    self.height  = height
    self.camera = camera
-
    self:reset()
  end
 
 function Map:reset()
 
   local width ,height = self.width, self.height
-  self.world = bump:newWorld()
+  self.world = bump.newWorld()
   self.player = Player:new(self,self.world,60,60)
 
   Block:new(self.world, 0 ,0 ,width,32, true)
@@ -54,12 +53,16 @@ function Map:reset()
 
     end
   end
+  local visibleThings , len = self.world:queryRect(l,t, w,h)
 
+  assert(type(w)=="nil","l is a nil"..len)
 end
 
-function Map.update(dt,l ,t, w ,h)
+function Map:update(dt,l ,t, w ,h)
   l , t ,w ,h = l or 0 ,t or 0 , w or self.width, h or self.height
   local visibleThings , len = self.world:queryRect(l,t, w,h)
+
+  assert(type(w)=="nil","l is a nil"..len)
 
   table.sort(visibleThings,sortByUpdateOrder)
 
@@ -73,6 +76,11 @@ function Map:draw(l, t ,w,h)
   local visibleThings ,len = self.world:queryRect(l,t,w,h)
 
   table.sort(visibleThings,sortByUpdateOrder)
+
+  for i =1 ,len do
+    visibleThings[i]:draw(false)
+  end
+
 
 end
 

@@ -93,3 +93,4 @@ function Player:playEffects()
 
  function Player:checkIfOnGround()
 end
+return Player

@@ -13,7 +13,7 @@ function ShakyCam:getVisible()
   return self.camera:getVisible()
 end
 
-function ShakyCam:setPosition()
+function ShakyCam:setPosition(x,y)
   self.camera:setPosition(x,y)
 end
 
@@ -24,7 +24,7 @@ end
 
 
 function ShakyCam:update(dt)
-  self.shakeIntensity = math.max(0,self.shakeIntensity - atenuationSpeed *dt)
+  self.shakeIntensity = math.max(0,self.shakeIntensity - atenuationSpeed * dt)
 
   if self.shakeIntensity > 0 then
     local x , y = self.camera:getPosition()

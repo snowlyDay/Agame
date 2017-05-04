@@ -31,8 +31,10 @@ function Entity:changeVelocityByCollisionNormal(nx ,ny,bounciness)
 end
 
 function Entity:getCenter ()
-  return self.l + self.w/2 ,
-          self.t +self.h/2
+  return  200 ,333
+
+  -- self.l + self.w /2,
+  --         self.t +self.h / 2
 end
 
 function Entity:destroy ()

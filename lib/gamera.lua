@@ -35,8 +35,9 @@ local function checkAABB( l ,t, w,h)
    scale = scale or self.scale
    local sin ,cos = abs(self.sin) , abs(self.cos)
    local w , h = self.w/scale ,  self.h /scale
-   print(w..h)
+
    w , h = cos*w + sin*h ,sin*w +cos*h
+
    return min(w ,self.ww) , min(h ,self.wh)
  end
 
@@ -74,6 +75,11 @@ function gamera:setWorld(l ,t,w,h)
   adjustPosition(self)
 end
 
+function gamera:setWindow(l ,t, w,h)
+  checkAABB(l,t,w,h)
+  self.l ,self.t ,self.w ,self.h ,self.w2 , self.h2 =l ,t, w ,h,w*0.5,h*0.5
+  adjustPosition(self)
+end
 function gamera:setPosition(x ,y)
   checkNumber(x, "x")
   checkNumber(y ,"y")
@@ -97,6 +103,10 @@ function gamera:setAngle(angle)
 end
 function gamera:getWorld()
   return self.wl ,self.wt , self.ww ,self.wh
+end
+
+function gamera:getWindow()
+  return self.l ,self.t  ,self.w, self.h
 end
 
 function gamera:getPosition()
@@ -127,7 +137,7 @@ function gamera:getVisibleCorners()
 end
 
 function gamera:draw(f)
-  love.graphics.setScissor(self.getWindow())
+  love.graphics.setScissor(self:getWindow())
 
   love.graphics.push()
   local scale = self.scale
